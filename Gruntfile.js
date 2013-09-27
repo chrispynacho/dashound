@@ -357,6 +357,13 @@ module.exports = function (grunt) {
         singleRun: true
       }
     },
+		simplemocha: {
+	    options: {
+	      ignoreLeaks: false,
+	      reporter: 'spec'
+	    },
+	    all: { src: ['test/server/**/*.js'] }
+	  },
     cdnify: {
       dist: {
         html: ['<%= yeoman.dist %>/*.html']
@@ -414,8 +421,14 @@ module.exports = function (grunt) {
     'concurrent:test',
     'autoprefixer',
     'connect:test',
-    'karma'
+    'karma',
+		'simplemocha'
   ]);
+
+	grunt.registerTask('apitest', [
+		'connect:test',
+		'simplemocha'
+	]);
 
   grunt.registerTask('build', [
     'clean:dist',
