@@ -1,8 +1,16 @@
+var wallboards = require('./wallboards');
 
-/*
- * GET home page.
- */
+function index(req, res){
+  res.render('index', { title: 'Dashound' });
+};
 
-exports.index = function(req, res){
-  res.render('index', { title: 'Express' });
+function routes(app) {
+  app.get('/', index);
+  app.get('/index', index);
+
+  wallboards.routes(app);
+};
+
+module.exports = {
+  routes: routes
 };
