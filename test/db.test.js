@@ -13,5 +13,27 @@ describe('db', function() {
       done();
     });
   });
+
+  it('should add objects to the database', function (done) {
+    db.put('dink', 'blam', function(err) {
+        should.not.exist(err);
+        db.get('dink', function (err, value) {
+            should.not.exist(err);
+            value.should.eql('blam');
+            done();
+        });
+    });
+  });
+
+  it('should add objects to the database', function (done) {
+    db.put('dink', 'blam', function(err) {
+      db.del('dink', function (err, value) {
+        db.get('dink', function (err, value) {
+          err.notFound.should.be.ok;
+          done();
+        });
+      });
+    });
+  });
 });
 
