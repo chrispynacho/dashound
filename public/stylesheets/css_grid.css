@@ -1,0 +1,17 @@
+.clearfix:before, 
+.clearfix:after { content: " "; display: table; }
+.clearfix:after { clear: both; }
+
+.size1of1{float:left; width:100%;}
+.size1of2, .size2of4 {float:left; width:50%;}
+.size1of3{float:left; width:33%;}
+.size2of3{float:left; width:66%;}
+.size1of4{float:left; width:25%;}
+.size3of4{float:left; width:75%;}
+.size1of5{float:left; width:20%;}
+.size2of5{float:left; width:40%;}
+.size3of5{float:left; width:60%;}
+.size4of5{float:left; width:80%;}
+.r-pad { padding-right: 20px; }
+.l-pad { padding-left: 20px; }
+.margin { margin: 0 20px; }
