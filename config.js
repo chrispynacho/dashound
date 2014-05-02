@@ -1,7 +1,7 @@
 function config() {
   var environmentSettings = {
     db: {
-      path: '/home/nacho/dash_data',
+      path: 'database',
       options: {
         encoding: 'json',
         createIfMissing: true
