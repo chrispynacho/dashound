@@ -7,11 +7,12 @@ var express = require('express');
 var routes = require('./routes');
 var http = require('http');
 var path = require('path');
+var config = require('./config');
 
 var app = express();
 
 // all environments
-app.set('port', process.env.PORT || 3000);
+app.set('port', process.env.PORT || config.app.port || 3000);
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 app.use(express.favicon());
@@ -22,7 +23,6 @@ app.use(express.cookieParser('your secret here'));
 app.use(express.session());
 app.use(app.router);
 app.use(require('less-middleware')(path.join(__dirname, '/public')));
-//app.use(lessMiddleware(path.join(__dirname, '/public')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // development only
