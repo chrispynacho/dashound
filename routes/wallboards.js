@@ -2,10 +2,11 @@ var wallboards = require('../lib/wallboards');
 
 function routes(app) {
   app.get('/wallboards', list);
+  app.post('/wallboards', post);
   app.get('/wallboards/:wallboardId', get);
 }
 
-function list(req, res){
+function list(req, res) {
   wallboards.list(function(err, data) {
     data = data || [];
     res.set('Content-Type', 'application/json');
@@ -13,12 +14,20 @@ function list(req, res){
   });
 };
 
-function get(req, res){
+function get(req, res) {
   wallboards.get(req.params.wallboardId, function(err, data) {
     data = data || [];
     res.set('Content-Type', 'application/json');
     res.send(data);
   });
+};
+
+function post(req, res) {
+  wallboards.add(req.body, function(err, data) {
+    data = data || [];
+    res.set('Content-Type', 'application/json');
+    res.send(data);
+  })
 };
 
 module.exports = {

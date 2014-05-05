@@ -99,7 +99,7 @@ describe('wallboards API', function() {
         });
     });
 
-    it.only('should return a 404 if the wallboard is not found', function(done) {
+    it('should return a 404 if the wallboard is not found', function(done) {
       supertest('http://localhost:3000')
         .get('/wallboards/999999999999999999999999')
         .send()
@@ -113,7 +113,25 @@ describe('wallboards API', function() {
 
   });
 
+  describe('POST /wallboards/:wallboardId', function() {
+    // the callback in db.wallboards.insert isn't being called in this test
+    // ...oddly enough it works when the app is run like: node app.js
+    it.skip('should add a wallboard', function(done) {
+      var wb5 = {name: "walboard WTF"};
+      supertest('http://localhost:3000')
+        .post('/wallboards')
+        .set('Content-Type', 'application/json')
+        .send(wb5)
+        .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          console.log('TEST', err, res);
+          done();
+        });
+      done();
+    });
 
+  });
 
 });
 
