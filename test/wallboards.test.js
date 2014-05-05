@@ -80,6 +80,7 @@ describe('wallboards API', function() {
   });
 
   describe('GET /wallboards/:wallboardId', function() {
+    
     var wb4 = newWallboard();
     before(function(done) {
       wallboards.add(wb4, done);
@@ -98,7 +99,21 @@ describe('wallboards API', function() {
         });
     });
 
+    it.only('should return a 404 if the wallboard is not found', function(done) {
+      supertest('http://localhost:3000')
+        .get('/wallboards/999999999999999999999999')
+        .send()
+        .expect(404)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          res.body.should.be.empty;
+          done();
+        });
+    });
+
   });
+
+
 
 });
 
