@@ -1,11 +1,20 @@
-var db = require('../lib/db');
+var wallboards = require('../lib/wallboards');
 
 function routes(app) {
   app.get('/wallboards', list);
+  app.get('/wallboards/:wallboardId', get);
 }
 
 function list(req, res){
-  db.get('wallboards', function(err, data) {
+  wallboards.list(function(err, data) {
+    data = data || [];
+    res.set('Content-Type', 'application/json');
+    res.send(data);
+  });
+};
+
+function get(req, res){
+  wallboards.get(req.params.wallboardId, function(err, data) {
     data = data || [];
     res.set('Content-Type', 'application/json');
     res.send(data);

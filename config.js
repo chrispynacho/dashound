@@ -4,7 +4,8 @@ function config() {
       port: 3000
     },
     db: {
-      path: 'database',
+      host: 'mongodb://127.0.0.1/',
+      name: 'dashound',
       options: {
         encoding: 'json',
         createIfMissing: true
