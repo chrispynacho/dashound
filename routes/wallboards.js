@@ -5,6 +5,7 @@ function routes(app) {
   app.post('/wallboards', post);
   app.get('/wallboards/:wallboardId', get);
   app.put('/wallboards/:wallboardId', put);
+  app.delete('/wallboards/:wallboardId', deleteWallboard);
 }
 
 function list(req, res) {
@@ -33,6 +34,14 @@ function post(req, res) {
 
 function put(req, res) {
   wallboards.update(req.params.wallboardId, req.body, function(err, data) {
+    data = data || [];
+    res.set('Content-Type', 'application/json');
+    res.send(data);
+  });
+};
+
+function deleteWallboard(req, res) {
+  wallboards.delete(req.params.wallboardId, function(err, data) {
     data = data || [];
     res.set('Content-Type', 'application/json');
     res.send(data);

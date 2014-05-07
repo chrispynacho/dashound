@@ -114,10 +114,8 @@ describe('wallboards API', function() {
   });
 
   describe('POST /wallboards', function() {
-    // the callback in db.wallboards.insert isn't being called in this test
-    // ...oddly enough it works when the app is run like: node app.js
-    it.skip('should add a wallboard', function(done) {
-      var wb5 = {name: "walboard WTF"};
+    it('should add a wallboard', function(done) {
+      var wb5 = {name: "walboard #5"};
       supertest('http://localhost:3000')
         .post('/wallboards')
         .set('Content-Type', 'application/json')
@@ -125,18 +123,16 @@ describe('wallboards API', function() {
         .expect(200)
         .expect('Content-Type', /json/)
         .end(function(err, res) {
-          console.log('TEST', err, res);
-          //TODO: once it can get here, write a real test
+          should.not.exist(err);
+          res.body.should.containDeep(wb5);
           done();
         });
-      done();
     });
 
   });
 
-
   describe('PUT /wallboards/:wallboardId', function() {
-    it.only('should update a wallboard', function(done) {
+    it('should update a wallboard', function(done) {
       var wb6 = {name: "walboard #6"};
 
       wallboards.add(wb6, function(err, data) {
@@ -161,7 +157,37 @@ describe('wallboards API', function() {
 
     });
   });
-  //TODO: DELETE /wallboards/:wallboardId
+  
+  describe('DELETE /wallboards/:wallboardId', function() {
+    it('should delete a wallboard', function(done) {
+      var wb7 = {name: "walboard #7"};
+
+      wallboards.add(wb7, function(err, data) {
+      var wallboardId = data._id;
+      wallboards.get(wallboardId, function(err, wb) {
+        should.not.exist(err);
+
+        supertest('http://localhost:3000')
+          .delete('/wallboards/' + wallboardId)
+          .set('Content-Type', 'application/json')
+          .send(wb7)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end(function(err, res) {
+            should.not.exist(err);
+            res.body.n.should.eql(1);
+
+            wallboards.get(wb._id, function(err, data) {
+              should.not.exist(data);
+              done();
+            });
+
+          });
+      });
+    });
+
+    });
+  });
 
 });
 
