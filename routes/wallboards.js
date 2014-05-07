@@ -4,6 +4,7 @@ function routes(app) {
   app.get('/wallboards', list);
   app.post('/wallboards', post);
   app.get('/wallboards/:wallboardId', get);
+  app.put('/wallboards/:wallboardId', put);
 }
 
 function list(req, res) {
@@ -27,7 +28,15 @@ function post(req, res) {
     data = data || [];
     res.set('Content-Type', 'application/json');
     res.send(data);
-  })
+  });
+};
+
+function put(req, res) {
+  wallboards.update(req.params.wallboardId, req.body, function(err, data) {
+    data = data || [];
+    res.set('Content-Type', 'application/json');
+    res.send(data);
+  });
 };
 
 module.exports = {

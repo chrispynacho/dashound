@@ -113,7 +113,7 @@ describe('wallboards API', function() {
 
   });
 
-  describe('POST /wallboards/:wallboardId', function() {
+  describe('POST /wallboards', function() {
     // the callback in db.wallboards.insert isn't being called in this test
     // ...oddly enough it works when the app is run like: node app.js
     it.skip('should add a wallboard', function(done) {
@@ -126,12 +126,42 @@ describe('wallboards API', function() {
         .expect('Content-Type', /json/)
         .end(function(err, res) {
           console.log('TEST', err, res);
+          //TODO: once it can get here, write a real test
           done();
         });
       done();
     });
 
   });
+
+
+  describe('PUT /wallboards/:wallboardId', function() {
+    it.only('should update a wallboard', function(done) {
+      var wb6 = {name: "walboard #6"};
+
+      wallboards.add(wb6, function(err, data) {
+      var wallboardId = data._id;
+      wallboards.get(wallboardId, function(err, wb) {
+        should.not.exist(err);
+
+        wb6.name += " rocks";
+        supertest('http://localhost:3000')
+          .put('/wallboards/' + wallboardId)
+          .set('Content-Type', 'application/json')
+          .send(wb6)
+          .expect(200)
+          .expect('Content-Type', /json/)
+          .end(function(err, res) {
+            should.not.exist(err);
+            res.body.should.containDeep(wb6);
+            done();
+          });
+      });
+    });
+
+    });
+  });
+  //TODO: DELETE /wallboards/:wallboardId
 
 });
 
