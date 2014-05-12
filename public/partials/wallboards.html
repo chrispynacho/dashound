@@ -1,7 +1,14 @@
-<p>There are {{wallboards.length}} wallboards</p>
+<div id="wallboard">
+  <div class="header">
+    <select ng-model="currentWallboard" ng-options="wallboard.name for wallboard in wallboards track by wallboard._id" ng-change="selectWallboard()" ng-hide="editing"></select>
+    <button ng-click="showAddWallboard()" ng-hide="editing">+</button>
+    <button ng-click="removeWallboard()" ng-hide="editing">-</button>
+    <form ng-submit="addWallboard()">
+      <input type="text" name="name" ng-model="currentWallboard.name" ng-show="editing"></div>
+    </form>
+  </div>
 
-<div ng-repeat="board in wallboards">
-
-  <h3>{{board.name}}</h3>
-
-</div<
+  <div class="wallboard-grid">
+  {{currentWallboard.name}}
+  </div>
+</div>
