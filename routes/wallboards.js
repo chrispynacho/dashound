@@ -1,11 +1,11 @@
 var wallboards = require('../lib/wallboards');
 
 function routes(app) {
-  app.get('/wallboards', list);
-  app.post('/wallboards', post);
-  app.get('/wallboards/:wallboardId', get);
-  app.put('/wallboards/:wallboardId', put);
-  app.delete('/wallboards/:wallboardId', deleteWallboard);
+  app.get('/api/wallboards', list);
+  app.post('/api/wallboards', post);
+  app.get('/api/wallboards/:wallboardId', get);
+  app.put('/api/wallboards/:wallboardId', put);
+  app.delete('/api/wallboards/:wallboardId', deleteWallboard);
 }
 
 function list(req, res) {

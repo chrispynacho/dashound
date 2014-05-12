@@ -58,7 +58,7 @@ describe('wallboards lib', function() {
 
 describe('wallboards API', function() {
 
-	describe('GET /wallboards', function() {
+	describe('GET /api/wallboards', function() {
     var idx = 3;
 
     before(function(done) {
@@ -67,7 +67,7 @@ describe('wallboards API', function() {
 
     it('should list wallboards', function(done) {
       supertest('http://localhost:3000')
-        .get('/wallboards')
+        .get('/api/wallboards')
         .send()
         .expect(200)
         .expect('Content-Type', /json/)
@@ -79,7 +79,7 @@ describe('wallboards API', function() {
       });
   });
 
-  describe('GET /wallboards/:wallboardId', function() {
+  describe('GET /api/wallboards/:wallboardId', function() {
     
     var wb4 = newWallboard();
     before(function(done) {
@@ -89,7 +89,7 @@ describe('wallboards API', function() {
     it('should get a single wallboard by id', function(done) {
      var wallboardId = wb4._id;
      supertest('http://localhost:3000')
-        .get('/wallboards/' + wallboardId)
+        .get('/api/wallboards/' + wallboardId)
         .send()
         .expect(200)
         .expect('Content-Type', /json/)
@@ -101,7 +101,7 @@ describe('wallboards API', function() {
 
     it('should return a 404 if the wallboard is not found', function(done) {
       supertest('http://localhost:3000')
-        .get('/wallboards/999999999999999999999999')
+        .get('/api/wallboards/999999999999999999999999')
         .send()
         .expect(404)
         .expect('Content-Type', /json/)
@@ -113,11 +113,11 @@ describe('wallboards API', function() {
 
   });
 
-  describe('POST /wallboards', function() {
+  describe('POST /api/wallboards', function() {
     it('should add a wallboard', function(done) {
       var wb5 = {name: "walboard #5"};
       supertest('http://localhost:3000')
-        .post('/wallboards')
+        .post('/api/wallboards')
         .set('Content-Type', 'application/json')
         .send(wb5)
         .expect(200)
@@ -131,7 +131,7 @@ describe('wallboards API', function() {
 
   });
 
-  describe('PUT /wallboards/:wallboardId', function() {
+  describe('PUT /api/wallboards/:wallboardId', function() {
     it('should update a wallboard', function(done) {
       var wb6 = {name: "walboard #6"};
 
@@ -142,7 +142,7 @@ describe('wallboards API', function() {
 
         wb6.name += " rocks";
         supertest('http://localhost:3000')
-          .put('/wallboards/' + wallboardId)
+          .put('/api/wallboards/' + wallboardId)
           .set('Content-Type', 'application/json')
           .send(wb6)
           .expect(200)
@@ -158,7 +158,7 @@ describe('wallboards API', function() {
     });
   });
   
-  describe('DELETE /wallboards/:wallboardId', function() {
+  describe('DELETE /api/wallboards/:wallboardId', function() {
     it('should delete a wallboard', function(done) {
       var wb7 = {name: "walboard #7"};
 
@@ -168,7 +168,7 @@ describe('wallboards API', function() {
         should.not.exist(err);
 
         supertest('http://localhost:3000')
-          .delete('/wallboards/' + wallboardId)
+          .delete('/api/wallboards/' + wallboardId)
           .set('Content-Type', 'application/json')
           .send(wb7)
           .expect(200)
