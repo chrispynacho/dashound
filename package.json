@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js",
+    "start": "bin/start",
     "test": "node_modules/mocha/bin/mocha"
   },
   "dependencies": {
@@ -12,7 +12,8 @@
     "jsonquery-engine": "0.0.6",
     "less-middleware": "^0.2.1-beta",
     "lodash": "^2.4.1",
-    "mongojs": "^0.13.0"
+    "mongojs": "^0.13.0",
+    "nodemon": "^1.0.17"
   },
   "devDependencies": {
     "mocha": "^1.18.2",
