@@ -2,7 +2,7 @@ dashControllers.directive('widget', function() {
   return {
     restrict: 'E',
     scope: true,
-    template: '<div>{{widget.name}}</div>',
+    templateUrl: 'partials/widget.html',
     link: function(scope, element, attrs) {
       console.log('widget', scope, element, attrs);
     }

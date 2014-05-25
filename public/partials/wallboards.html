@@ -1,6 +1,6 @@
 <div id="wallboard">
   <div class="header">
-    
+
     <select ng-model="currentWallboard" ng-options="wallboard.name for wallboard in wallboards track by wallboard._id" ng-change="selectWallboard()" ng-hide="editing"></select>
 
     <button ng-click="showAddWallboard()" ng-hide="editing">+</button>
@@ -11,7 +11,7 @@
   </div>
 
   <div id="grid">
-    <widget ng-repeat="widget in currentWallboard.widgets" class="size1of5"></widget>
+    <widget ng-repeat="widget in currentWallboard.widgets track by $index" class="size1of5"></widget>
     <div ng-click="addWidget()" class="add-button size1of5">Add Widget</div>
   </div>
 </div>
