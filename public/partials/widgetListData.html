@@ -1,0 +1,22 @@
+<div class="data-lister">
+  <div class="widget-content">
+    <div class="widget-label">{{widget.config.label}}</div>
+    <ul>
+      <li ng-repeat="item in widget.config.list track by $index">{{item[widget.config.column]}}</li>
+    </ul>
+  </div>
+  <div class="widget-config" ng-show="showConfig">
+    <div>
+      <label for="label">Label</label>
+      <input name="label" type="text" ng-model="widget.config.label" />
+    </div>
+    <div>
+      <label for="column">Column</label>
+      <input name="column" type="text" ng-model="widget.config.column" />
+    </div>
+    <div>
+      <label for="name">Data</label>
+      <input name="list" type="text" ng-model="listText"/>
+    </div>
+  </div>
+</div>

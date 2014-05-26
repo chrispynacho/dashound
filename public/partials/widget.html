@@ -7,7 +7,7 @@
       <button class="delete" ng-click="deleteWidget(widget, $index)">
         <span class="glyphicon glyphicon-remove"></span>
       </button>
-      <select ng-model="widget.name" ng-options="widget.name for type in widgetTypes"></select>
+      <select ng-model="widget.type" ng-options="type for type in widgetTypes" ng-change="changeWidgetType()"></select>
     </span>
   </div>
   <div class="widget-content" ng-transclude></div>

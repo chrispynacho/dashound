@@ -12,6 +12,9 @@
 
   <div id="grid">
     <widget ng-repeat="widget in currentWallboard.widgets track by $index" class="size1of5"></widget>
-    <div ng-click="addWidget()" class="add-button size1of5">Add Widget</div>
+    <div ng-click="addWidget()" class="add-button size1of5">
+      <div class="glyphicon glyphicon-plus-sign"></div>
+      <div class="label">Add Widget</div>
+    </div>
   </div>
 </div>

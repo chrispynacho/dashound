@@ -10,7 +10,7 @@ dashControllers.controller('WallboardCtrl', ['$scope', 'Wallboards',
 
     $scope.showAddWallboard = function showAddWallboard() {
       $scope.editing = true;
-      $scope.currentWallboard = {name: 'New Wallboard', widgets: [{name: 'New Widget'}]};
+      $scope.currentWallboard = {name: 'New Wallboard', widgets: [{type: 'day-counter'}]};
     };
 
     $scope.addWallboard = function addWallboard() {
@@ -39,7 +39,7 @@ dashControllers.controller('WallboardCtrl', ['$scope', 'Wallboards',
 
     $scope.addWidget = function addWidget() {
       var widgets = $scope.currentWallboard.widgets = $scope.currentWallboard.widgets || [];
-      var widget = {name: 'New Widget' + (widgets.length + 1)};
+      var widget = {type: 'day-counter'};
       widgets.push(widget);
       
       $scope.updateCurrentWallboard();
