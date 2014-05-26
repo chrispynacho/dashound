@@ -48,7 +48,7 @@ dashControllers.controller('WallboardCtrl', ['$scope', 'Wallboards',
     $scope.deleteWidget = function deleteWidget(widget, index) {
       var widgets = $scope.currentWallboard.widgets;
       widgets.splice(index, 1);
-      
+
       $scope.updateCurrentWallboard();
     };
   }

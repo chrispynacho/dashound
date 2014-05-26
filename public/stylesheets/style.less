@@ -12,6 +12,8 @@ a {
 
 /* widgets */
 
+@ok-color: #090;
+@bad-color: #900;
 
 widget, .add-button {
   height: 200px;
@@ -39,4 +41,29 @@ widget, .add-button {
 .add-button {
   text-align: center;
   cursor: pointer;
+}
+
+/* days counter widget */
+widget .days-counter {
+  text-align: center;
+  font-weight: bold;
+  font-size: 1.5em;
+  .until {
+    color: @ok-color;
+  }
+  .since {
+    color: @bad-color;
+  }
+  .days-count {
+    font-size: 5em;
+  }
+  .days-preposition.until, .days-label.until {
+    color: darken(@ok-color, 10%);
+  }
+  .days-preposition.since, .days-label.since {
+    color: darken(@ok-color, 10%);
+  }
+  .days-label {
+    color: #999;
+  }
 }

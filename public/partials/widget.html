@@ -1,9 +1,9 @@
 <div>
   <button ng-model="showConfig" ng-click="showConfig = ! showConfig" class="show-config">C</button>
-  <div class="widget-content">
-    {{widget.name}}
-  </div>
-  <div class="widget-config" ng-show="showConfig">
+
+  <div class="widget-content" ng-transclude></div>
+
+  <div class="widget-controls" ng-show="showConfig">
     <button class="close" ng-click="showConfig = ! showConfig">X</button>
     <button class="delete" ng-click="deleteWidget(widget, $index)">d</button>
     <div>Config</div>
