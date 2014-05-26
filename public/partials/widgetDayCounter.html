@@ -1,5 +1,17 @@
 <div class="days-counter">
-  <div class="days-count {{preposition}}">{{days}}</div>
-  <div class="days-preposition {{preposition}}">days {{preposition}}</div>
-  <div class="days-label">{{widget.config.label}}</div>
+  <div class="widget-content">
+    <div class="days-count {{widget.config.date | intervalPreposition}}">{{widget.config.date | intervalToDays}}</div>
+    <div class="days-preposition {{preposition}}">days {{widget.config.date | intervalPreposition}}</div>
+    <div class="days-label">{{widget.config.label}}</div>
+  </div>
+  <div class="widget-config" ng-show="showConfig">
+    <div>
+      <label for="name">Label</label>
+      <input name="date" type="text" ng-model="widget.config.label" />
+    </div>
+    <div>
+      <label for="name">Date</label>
+      <input name="date" type="date" ng-model="widget.config.date" />
+    </div>
+  </div>
 </div>

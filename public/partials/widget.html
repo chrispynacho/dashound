@@ -1,11 +1,14 @@
 <div>
-  <button ng-model="showConfig" ng-click="showConfig = ! showConfig" class="show-config">C</button>
-
-  <div class="widget-content" ng-transclude></div>
-
-  <div class="widget-controls" ng-show="showConfig">
-    <button class="close" ng-click="showConfig = ! showConfig">X</button>
-    <button class="delete" ng-click="deleteWidget(widget, $index)">d</button>
-    <div>Config</div>
+  <div class="widget-controls">
+    <button ng-model="showConfig" ng-click="showWidgetConfig()" class="show-config">
+      <span class="glyphicon glyphicon-cog"></span>
+    </button>
+    <span ng-show="showConfig">
+      <button class="delete" ng-click="deleteWidget(widget, $index)">
+        <span class="glyphicon glyphicon-remove"></span>
+      </button>
+      <span>{{widget.name}}</span>
+    </span>
   </div>
+  <div class="widget-content" ng-transclude></div>
 </div>
