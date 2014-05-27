@@ -2,7 +2,7 @@
   <div class="widget-content">
     <div class="widget-label">{{widget.config.label}}</div>
     <ul>
-      <li ng-repeat="item in widget.config.list track by $index">{{item[widget.config.column]}}</li>
+      <li ng-repeat="item in widget.config.list track by $index">{{item | keypath:widget.config.column}}</li>
     </ul>
   </div>
 

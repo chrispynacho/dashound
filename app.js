@@ -8,6 +8,7 @@ var routes = require('./routes');
 var http = require('http');
 var path = require('path');
 var config = require('./config');
+var datasources = require('./lib/data_sources');
 
 var app = express();
 
@@ -34,4 +35,8 @@ routes.routes(app);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));
+});
+
+datasources.pollAllSources(function() {
+  console.log('Started polling all datasources');
 });

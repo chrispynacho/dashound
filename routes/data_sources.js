@@ -7,6 +7,7 @@ function routes(app) {
   app.put('/api/data/:dataSourceId', updateSource);
   app.delete('/api/data/:dataSourceId', deleteSource);
   app.get('/api/data/:dataSourceId/feed', loadDataFeed);
+  app.get('/api/data/:dataSourceId/feed/:limit', loadDataFeed);
 }
 
 function listSources(req, res) {
@@ -50,8 +51,8 @@ function deleteSource(req, res) {
 };
 
 function loadDataFeed(req, res) {
-  sources.loadData(req.params.dataSourceId, function(err, data) {
-    data = data.body || [];
+  sources.loadData(req.params.dataSourceId, req.params.limit || 1, function(err, data) {
+    data = data || [];
     res.set('Content-Type', 'application/json');
     res.send(data);
   });

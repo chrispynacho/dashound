@@ -11,3 +11,12 @@ dashControllers.filter('intervalPreposition', function() {
     return (interval > 0)? 'until': 'since';
   };
 });
+
+dashControllers.filter('keypath', function() {
+  return function(input, path) {
+    if (input) {
+      return _.keypath(input, path);
+    }
+    return input;
+  };
+});

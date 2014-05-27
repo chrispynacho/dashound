@@ -88,22 +88,23 @@ dashControllers.directive('liveValue', ['DataSources',
       templateUrl: 'partials/widgetLiveValue.html',
       link: function(scope, element, attrs) {
         var userConfig = (scope && scope.widget && scope.widget.config) || {};
-        var config = {label: 'Server Load', keyPath: 'one', dataSourceId: '0', interval: 10000};
+        var config = {label: 'Server Load', keyPath: '0.value.one', dataSourceId: '0', interval: 5000};
         angular.extend(config, userConfig);
 
         DataSources.query(function(datasources) {
           scope.datasources = datasources;
+          scope.loadDataFeed();
         });
 
         scope.loadDataFeed = function loadDataFeed() {
           DataSources.feed({'dataSourceId': scope.widget.config.dataSourceId._id}, function(dataFeed) {
-            scope.dataFeed = dataFeed;
+            scope.dataFeed = dataFeed || [];
           });
         };
 
         setInterval(function() {
           scope.loadDataFeed();
-          //scope.$apply();
+          scope.$apply();
         }, config.interval);
       }
     };

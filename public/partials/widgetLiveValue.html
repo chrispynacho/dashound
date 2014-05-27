@@ -1,7 +1,7 @@
 <div class="live-value">
   <div class="widget-content">
     <div class="widget-label">{{widget.config.label}}</div>
-    <div>{{dataFeed[widget.config.keyPath]}}</div>
+    <div>{{dataFeed | keypath:widget.config.keyPath}}</div>
   </div>
 
   <div class="widget-config" ng-show="showConfig">

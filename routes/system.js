@@ -7,22 +7,18 @@ function routes(app) {
 
 function load(req, res) {
   var loadData = os.loadavg();
-  var now = new Date();
   var load = {
     one: loadData[0],
     five: loadData[1],
-    fifteen: loadData[2],
-    date: now.toString()
+    fifteen: loadData[2]
   };
   res.send(load);
 };
 
 function memory(req, res) {
-  var now = new Date();
   var mem = {
     total: os.totalmem(),
-    free: os.freemem(),
-    date: now.toString()
+    free: os.freemem()
   };
   res.send(mem);
 };

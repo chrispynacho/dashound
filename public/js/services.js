@@ -11,7 +11,7 @@ dashServices.factory('DataSources', ['$resource',
     return $resource('/api/data/:dataSourceId', {dataSourceId:'@_id'},
       {
         'update': {method: 'PUT'},
-        'feed': {method: 'GET', url: '/api/data/:dataSourceId/feed'}
+        'feed': {method: 'GET', url: '/api/data/:dataSourceId/feed', isArray: true}
       }
     );
   }
