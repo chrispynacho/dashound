@@ -27,7 +27,7 @@ dashControllers.directive('widget', function($compile) {
       };
 
       // TODO: find out how to introspect directives to get list of them, exclude 'widget'
-      scope.widgetTypes = ['day-counter', 'list-data', 'live-value'];
+      scope.widgetTypes = ['day-counter', 'list-data', 'live-value', 'line-graph'];
       scope.loadWidgetByType();
     }
   };
@@ -102,6 +102,86 @@ dashControllers.directive('liveValue', ['DataSources',
           });
         };
 
+        setInterval(function() {
+          scope.loadDataFeed();
+          scope.$apply();
+        }, config.interval);
+      }
+    };
+  }
+]);
+
+dashControllers.directive('lineGraph', ['DataSources',
+  function (DataSources) {
+    return {
+      restrict: 'E',
+      scope: true,
+      templateUrl: 'partials/widgetLineGraph.html',
+      link: function(scope, element, attrs) {
+        console.log('lineGraph');
+
+        // set up config
+        var userConfig = (scope && scope.widget && scope.widget.config) || {};
+        var config = {label: 'Server Load', keyPath: 'value.one', dataSourceId: '0', interval: 10000};
+        angular.extend(config, userConfig);
+
+        var svg = d3.select(element.find('svg')[0]);
+        console.log('svg', svg);
+
+        // Load list of datasources - then load data from source in config
+        DataSources.query(function(datasources) {
+          scope.datasources = datasources;
+          scope.loadDataFeed();
+        });
+
+        // Loads data feed
+        scope.loadDataFeed = function loadDataFeed() {
+          DataSources.feed({'dataSourceId': scope.widget.config.dataSourceId._id, limit: 50}, function(dataFeed) {
+            dataFeed = _.map(dataFeed, function (item) {
+              return _.keypath(item, scope.widget.config.keyPath);
+            });
+            scope.dataFeed = dataFeed || [];
+            console.log(dataFeed);
+            scope.render(scope.dataFeed);
+          });
+        };
+
+        // Render Graph
+        scope.render = function render(data) {
+          console.log('render()', data);
+          svg.selectAll('*').remove();
+
+          if (!data) return;
+
+          var width = element.find('.widget-content').width();
+          var height = element.find('.widget-content').height();
+          console.log(height, width);
+
+          svg.attr('width', width)
+            .attr('height', height);
+
+          var linearScale = d3.scale.linear()
+            .domain([0, 8])
+            .range([0, 200]);
+
+          var lineFunction = d3.svg.line()
+            .x(function (d, i) { return i * (width / 50); })
+            .y(function (d) { return linearScale(d); })
+            .interpolate('cardinal');
+
+          var lineGraph = svg.append('path')
+            .attr('d', lineFunction(data))
+            .attr('stroke', '#66A')
+            .attr('stroke-width', 3);
+            //.attr('fill', 'none');
+
+
+
+
+
+        };
+
+        // Update data using interval from config
         setInterval(function() {
           scope.loadDataFeed();
           scope.$apply();

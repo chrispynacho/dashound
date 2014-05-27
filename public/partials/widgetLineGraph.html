@@ -1,0 +1,21 @@
+<div class="line-graph">
+  <div class="widget-content">
+    <div class="widget-label">{{widget.config.label}}</div>
+    <svg></svg>
+  </div>
+
+  <div class="widget-config" ng-show="showConfig">
+    <div>
+      <label for="label">Label</label>
+      <input name="label" type="text" ng-model="widget.config.label" />
+    </div>
+    <div>
+      <label for="key-path">Key Path</label>
+      <input name="key-path" type="text" ng-model="widget.config.keyPath" />
+    </div>
+    <div>
+      <label for="data-source">Datasource</label>
+      <select name="data-source" ng-model="widget.config.dataSourceId" ng-options="source.url for source in datasources track by source._id" ng-change="loadDataFeed()"></select>
+    </div>
+  </div>
+</div>
