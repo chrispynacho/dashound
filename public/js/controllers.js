@@ -27,8 +27,8 @@ dashControllers.controller('WallboardCtrl', ['$scope', 'Wallboards',
     };
 
     $scope.selectWallboard = function selectWallboard() {
-      console.log('selectWallboard: ', $scope.currentWallboard.name);
-      console.log('        widgets: ', $scope.currentWallboard.widgets);
+      //console.log('selectWallboard: ', $scope.currentWallboard.name);
+      //console.log('        widgets: ', $scope.currentWallboard.widgets);
     };
 
     $scope.updateCurrentWallboard = function updateCurrentWallboard(callback) {

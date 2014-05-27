@@ -118,15 +118,12 @@ dashControllers.directive('lineGraph', ['DataSources',
       scope: true,
       templateUrl: 'partials/widgetLineGraph.html',
       link: function(scope, element, attrs) {
-        console.log('lineGraph');
-
         // set up config
         var userConfig = (scope && scope.widget && scope.widget.config) || {};
         var config = {label: 'Server Load', keyPath: 'value.one', dataSourceId: '0', interval: 10000};
         angular.extend(config, userConfig);
 
         var svg = d3.select(element.find('svg')[0]);
-        console.log('svg', svg);
 
         // Load list of datasources - then load data from source in config
         DataSources.query(function(datasources) {
@@ -141,21 +138,18 @@ dashControllers.directive('lineGraph', ['DataSources',
               return _.keypath(item, scope.widget.config.keyPath);
             });
             scope.dataFeed = dataFeed || [];
-            console.log(dataFeed);
             scope.render(scope.dataFeed);
           });
         };
 
         // Render Graph
         scope.render = function render(data) {
-          console.log('render()', data);
           svg.selectAll('*').remove();
 
           if (!data) return;
 
           var width = element.find('.widget-content').width();
           var height = element.find('.widget-content').height();
-          console.log(height, width);
 
           svg.attr('width', width)
             .attr('height', height);
@@ -173,12 +167,6 @@ dashControllers.directive('lineGraph', ['DataSources',
             .attr('d', lineFunction(data))
             .attr('stroke', '#66A')
             .attr('stroke-width', 3);
-            //.attr('fill', 'none');
-
-
-
-
-
         };
 
         // Update data using interval from config
