@@ -51,7 +51,6 @@ function deleteSource(req, res) {
 
 function loadDataFeed(req, res) {
   sources.loadData(req.params.dataSourceId, function(err, data) {
-    console.log('loadDataFeed', err, data.body);
     data = data.body || [];
     res.set('Content-Type', 'application/json');
     res.send(data);
