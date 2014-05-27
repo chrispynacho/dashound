@@ -13,7 +13,8 @@
     "less-middleware": "^0.2.1-beta",
     "lodash": "^2.4.1",
     "mongojs": "^0.13.0",
-    "nodemon": "^1.0.17"
+    "nodemon": "^1.0.17",
+    "superagent": "^0.18.0"
   },
   "devDependencies": {
     "mocha": "^1.18.2",

@@ -26,24 +26,10 @@ dashControllers.directive('widget', function($compile) {
         scope.loadWidgetByType();
       };
 
-      // TODO: find out how to load widget types from subset of directives
-      scope.widgetTypes = ['day-counter', 'list-data'];
+      // TODO: find out how to introspect directives to get list of them, exclude 'widget'
+      scope.widgetTypes = ['day-counter', 'list-data', 'live-value'];
       scope.loadWidgetByType();
     }
-  };
-});
-
-dashControllers.filter('intervalToDays', function() {
-  return function(targetText) {
-    var interval = new Date(targetText) - new Date();
-    return Math.abs(Math.floor(interval / (1000 * 60 * 60 * 24))); // milliseconds -> days
-  };
-});
-
-dashControllers.filter('intervalPreposition', function() {
-  return function(targetText) {
-    var interval = new Date(targetText) - new Date();
-    return (interval > 0)? 'until': 'since';
   };
 });
 
@@ -55,7 +41,7 @@ dashControllers.directive('dayCounter', function() {
     link: function(scope, element, attrs) {
       // set up config
       var userConfig = scope && scope.widget && scope.widget.config || {};
-      var config = {label: 'Unix Epoch', date: '1970-01-01', interval: 1000};
+      var config = {label: 'Unix Epoch', date: '1970-01-01', interval: 60000};
       angular.extend(config, userConfig);
 
       // setup refresh on configured interval
@@ -72,7 +58,6 @@ dashControllers.directive('listData', function() {
     scope: true,
     templateUrl: 'partials/widgetListData.html',
     link: function(scope, element, attrs) {
-
       // set up config
       var userConfig = scope && scope.widget && scope.widget.config || {};
       var config = {label: 'Top Contributors', column: 'name', list: [{name: 'Alice'},{name: 'Bob'},{name: 'Carol'},{name: 'Dave'}], interval: 300000};
@@ -94,3 +79,33 @@ dashControllers.directive('listData', function() {
     }
   };
 });
+
+dashControllers.directive('liveValue', ['DataSources',
+  function (DataSources) {
+    return {
+      restrict: 'E',
+      scope: true,
+      templateUrl: 'partials/widgetLiveValue.html',
+      link: function(scope, element, attrs) {
+        var userConfig = (scope && scope.widget && scope.widget.config) || {};
+        var config = {label: 'Server Load', keyPath: 'one', dataSourceId: '0', interval: 10000};
+        angular.extend(config, userConfig);
+
+        DataSources.query(function(datasources) {
+          scope.datasources = datasources;
+        });
+
+        scope.loadDataFeed = function loadDataFeed() {
+          DataSources.feed({'dataSourceId': scope.widget.config.dataSourceId._id}, function(dataFeed) {
+            scope.dataFeed = dataFeed;
+          });
+        };
+
+        setInterval(function() {
+          scope.loadDataFeed();
+          //scope.$apply();
+        }, config.interval);
+      }
+    };
+  }
+]);
