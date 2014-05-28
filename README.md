@@ -2,6 +2,8 @@
 
 Dashboard is a basic dashboard/metrics app written in node.js
 
+![screenshot.png](https://bitbucket.org/repo/r7k8pX/images/4169304624-screenshot.png)
+
 ### How do I get set up? ###
 
 * Install and run mongodb
