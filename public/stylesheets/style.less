@@ -2,7 +2,7 @@ body {
   padding: 0;
   margin: 0;
   font: 14px Helvetica, Arial, sans-serif;
-  background: #000;
+  background: #111;
   color: #ddd;
 }
 
@@ -14,14 +14,22 @@ a {
 
 @ok-color: #090;
 @bad-color: #900;
+@widget-bg: #000;
+@widget-text-color: #ddd;
+@widget-label-color: #666;
+@widget-icon-color: #999;
 
 widget, .add-button {
-  height: 200px;
-  border: 1px solid #333;
   position: relative;
+  height: 200px;
+  width: 200px;
+  color: @widget-text-color;
+  background: @widget-bg;
+  margin: 5px;
+  padding: 3px;
   button {
     color: white;
-    background-color: #333;
+    background: none;
     border: none;
     height: 20px;
     width: 20px;
@@ -49,8 +57,16 @@ widget, .add-button {
   }
   .widget-controls {
     button {
+      opacity: 0.2;
       padding: 2px;
     }
+    button:hover {
+      opacity: 0.9;
+    }
+  }
+  .widget-label {
+    color: @widget-label-color;
+    font-weight: bold;
   }
 }
 .add-button {
@@ -58,14 +74,14 @@ widget, .add-button {
   cursor: pointer;
   font-size: 5em;
   padding-top: 50px;
-  color: #999;
+  color: @widget-icon-color;
   :hover {
-    color: #ccc;
+    color: lighten(@widget-icon-color, 20%);
   }
   .label {
     font-size: 20px;
     display: block;
-    color: #666;
+    color: @widget-label-color;
   }
 }
 
@@ -94,6 +110,34 @@ widget .days-counter .widget-content {
   }
 }
 
+/* list data widget */
+
+widget list-data {
+  ul {
+    list-style-type: none;
+    padding: 0 5px;
+    margin: 0;
+    li {
+      margin: 0;
+      font-size: 1.25em;
+      font-weight: bold;
+    }
+  }
+}
+
+widget live-value {
+  .widget-content {
+    .data-feed {
+      margin-top: 15px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 7em;
+      text-overflow: clip;
+      overflow: hidden;
+      white-space: nowrap;
+    }
+  }
+}
 /* line graph widget */
 
 widget .line-graph {

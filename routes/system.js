@@ -18,7 +18,8 @@ function load(req, res) {
 function memory(req, res) {
   var mem = {
     total: os.totalmem(),
-    free: os.freemem()
+    free: os.freemem(),
+    percentage: os.freemem() / os.totalmem() * 100
   };
   res.send(mem);
 };

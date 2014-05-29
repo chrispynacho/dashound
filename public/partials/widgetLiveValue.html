@@ -1,7 +1,7 @@
 <div class="live-value">
   <div class="widget-content">
     <div class="widget-label">{{widget.config.label}}</div>
-    <div>{{dataFeed | keypath:widget.config.keyPath}}</div>
+    <div class="data-feed">{{dataFeed | keypath:widget.config.keyPath | sprintf:widget.config.textFormat}}</div>
   </div>
 
   <div class="widget-config" ng-show="showConfig">
@@ -12,6 +12,10 @@
     <div>
       <label for="key-path">Key Path</label>
       <input name="key-path" type="text" ng-model="widget.config.keyPath" />
+    </div>
+    <div>
+      <label for="text-format">Key Path</label>
+      <input name="text-format" type="text" ng-model="widget.config.textFormat" />
     </div>
     <div>
       <label for="data-source">Datasource</label>

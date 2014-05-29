@@ -20,3 +20,12 @@ dashControllers.filter('keypath', function() {
     return input;
   };
 });
+
+dashControllers.filter('sprintf', function() {
+  return function(input, format) {
+    if (input) {
+      return sprintf(format, input);
+    }
+    return input;
+  };
+});
