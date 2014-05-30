@@ -1,0 +1,27 @@
+{
+  "name": "dashound",
+  "version": "0.0.1",
+  "authors": [
+    "Chris Camacho <chriscamacho@mac.com>"
+  ],
+  "description": "dash board metrics app",
+  "main": "bin/start",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "public/js/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-resource": "~1.2.16",
+    "angular-route": "~1.2.16",
+    "bootstrap": "~3.1.1",
+    "d3": "~3.4.8",
+    "lodash": "~2.4.1",
+    "sprintf": "~1.0.0",
+    "underscore-awesomer": "~1.2.4"
+  }
+}
